@@ -10,7 +10,8 @@
     "typeorm:build": "babel  ./src --out-dir dist --extensions '.ts,.tsx'",
     "migration:run": "typeorm migration:run",
     "migration:revert": "typeorm migration:revert",
-    "entity:create":"typeorm entity:create"
+    "entity:create": "typeorm entity:create",
+    "migration:create": "typeorm migration:create"
   },
   "dependencies": {
     "axios": "^0.20.0",
