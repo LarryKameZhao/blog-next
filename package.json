@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typeStart": "ts-node src/index.ts"
+    "typeStart": "ts-node src/index.ts",
+    "typeorm:build": "babel  ./src --out-dir dist --extensions '.ts,.tsx'",
+    "migration:run": "typeorm migration:run",
+    "migration:revert": "typeorm migration:revert",
+    "entity:create":"typeorm entity:create"
   },
   "dependencies": {
     "axios": "^0.20.0",
