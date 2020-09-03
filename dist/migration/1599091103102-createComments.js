@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CreateUsers1599090211827 = void 0;
+exports.createComments1599091103102 = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -17,12 +17,12 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _typeorm = require("typeorm");
 
-var CreateUsers1599090211827 = /*#__PURE__*/function () {
-  function CreateUsers1599090211827() {
-    (0, _classCallCheck2["default"])(this, CreateUsers1599090211827);
+var createComments1599091103102 = /*#__PURE__*/function () {
+  function createComments1599091103102() {
+    (0, _classCallCheck2["default"])(this, createComments1599091103102);
   }
 
-  (0, _createClass2["default"])(CreateUsers1599090211827, [{
+  (0, _createClass2["default"])(createComments1599091103102, [{
     key: "up",
     value: function () {
       var _up = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(queryRunner) {
@@ -31,7 +31,7 @@ var CreateUsers1599090211827 = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 queryRunner.createTable(new _typeorm.Table({
-                  name: 'users',
+                  name: 'comments',
                   columns: [{
                     name: 'id',
                     isGenerated: true,
@@ -39,11 +39,14 @@ var CreateUsers1599090211827 = /*#__PURE__*/function () {
                     generationStrategy: 'increment',
                     isPrimary: true
                   }, {
-                    name: 'username',
-                    type: 'varchar'
+                    name: 'user_id',
+                    type: 'int'
                   }, {
-                    name: 'password_digest',
-                    type: 'varchar'
+                    name: 'post_id',
+                    type: 'int'
+                  }, {
+                    name: 'content',
+                    type: 'text'
                   }]
                 }));
 
@@ -69,7 +72,7 @@ var CreateUsers1599090211827 = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                queryRunner.dropTable('users');
+                queryRunner.dropTable('comments');
 
               case 1:
               case "end":
@@ -86,7 +89,7 @@ var CreateUsers1599090211827 = /*#__PURE__*/function () {
       return down;
     }()
   }]);
-  return CreateUsers1599090211827;
+  return createComments1599091103102;
 }();
 
-exports.CreateUsers1599090211827 = CreateUsers1599090211827;
+exports.createComments1599091103102 = createComments1599091103102;
