@@ -2,23 +2,26 @@ import { GetServerSideProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { getConnection } from 'typeorm';
 import { getDataBaseConnection } from 'lib/getDatabaseConnection';
+import { Post } from 'src/entity/Post';
+import Link from 'next/link';
 
 type Props = {
-  browser: {
-    name: string;
-    version: string;
-    major: string;
-  };
+  posts: Post[];
 };
 const index: NextPage<Props> = (props) => {
-  const [width, setWidth] = useState(0);
-  useEffect(() => {
-    const w = document.documentElement.clientWidth;
-    setWidth(w);
-  }, []);
+  const { posts } = props;
+  console.log(posts);
+
   return (
     <div>
-      <h1>index1:{width}</h1>
+      <h1>文章列表</h1>
+      {posts.map((post) => (
+        <Link key={post.id} href={`/posts/${post.id}`}>
+          <a>
+            <div>{post.title}</div>
+          </a>
+        </Link>
+      ))}
     </div>
   );
 };
@@ -26,7 +29,11 @@ export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const connection = await getDataBaseConnection();
+  const posts = await connection.manager.find(Post);
+  console.log(posts);
   return {
-    props: {},
+    props: {
+      posts: JSON.parse(JSON.stringify(posts)),
+    },
   };
 };
