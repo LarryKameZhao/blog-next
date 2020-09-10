@@ -6,10 +6,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BeforeInsert,
 } from 'typeorm';
 import { Post } from './Post';
 import { Comment } from './Comment';
 import { getDataBaseConnection } from 'lib/getDatabaseConnection';
+import md5 from 'md5';
+import _ from 'lodash';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
@@ -60,5 +63,17 @@ export class User {
   }
   hasErrors() {
     return !!Object.values(this.errors).find((v) => v.length > 0);
+  }
+  @BeforeInsert()
+  generatePassowrdDigest() {
+    this.passwordDigest = md5(this.password);
+  }
+  toJSON() {
+    return _.omit(this, [
+      'password',
+      'passwordDigest',
+      'passwordConfirmation',
+      'errors',
+    ]);
   }
 }

@@ -13,7 +13,6 @@ const Posts: NextApiHandler = async (
   user.username = username.trim();
   user.password = password;
   user.passwordConfirmation = passwordConfirmation;
-  user.passwordDigest = md5(password);
   await user.validate();
   res.setHeader('Content-Type', 'application/json;charset=utf-8');
 
