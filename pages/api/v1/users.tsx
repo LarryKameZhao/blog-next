@@ -3,7 +3,7 @@ import { getDataBaseConnection } from 'lib/getDatabaseConnection';
 import { User } from 'src/entity/User';
 import md5 from 'md5';
 
-const Posts: NextApiHandler = async (
+const Users: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
@@ -27,4 +27,4 @@ const Posts: NextApiHandler = async (
   }
   res.end();
 };
-export default Posts;
+export default Users;

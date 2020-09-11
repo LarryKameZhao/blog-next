@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { useState, useCallback } from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-const SignUp: NextPage = () => {
+const SignIn: NextPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -16,7 +16,7 @@ const SignUp: NextPage = () => {
     (e) => {
       e.preventDefault();
       console.log(formData);
-      axios.post(`/api/v1/users`, formData).then(
+      axios.post(`/api/v1/sessions`, formData).then(
         () => {
           window.alert('register success');
           window.location.href = '/sign_in';
@@ -35,7 +35,7 @@ const SignUp: NextPage = () => {
   );
   return (
     <div>
-      <h1>注册</h1>
+      <h1>sign_in</h1>
       {JSON.stringify(formData)}
       <hr />
       {JSON.stringify(errors)}
@@ -72,29 +72,10 @@ const SignUp: NextPage = () => {
           )}
         </div>
         <div>
-          <label>
-            确认密码{' '}
-            <input
-              type='password'
-              value={formData.passwordConfirmation}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  passwordConfirmation: e.target.value,
-                });
-              }}
-            />
-          </label>
-          {errors.passwordConfirmation &&
-            errors.passwordConfirmation.length > 0 && (
-              <div>{errors.passwordConfirmation.join(',')}</div>
-            )}
-        </div>
-        <div>
-          <button type='submit'>注册</button>
+          <button type='submit'>登陆</button>
         </div>
       </form>
     </div>
   );
 };
-export default SignUp;
+export default SignIn;
