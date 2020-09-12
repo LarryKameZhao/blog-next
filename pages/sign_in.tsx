@@ -18,8 +18,7 @@ const SignIn: NextPage = () => {
       console.log(formData);
       axios.post(`/api/v1/sessions`, formData).then(
         () => {
-          window.alert('register success');
-          window.location.href = '/sign_in';
+          window.alert('login success');
         },
         (error) => {
           if (error.response) {

@@ -1,25 +1,19 @@
 import { NextApiHandler } from 'next';
-import { getDataBaseConnection } from 'lib/getDatabaseConnection';
-import { User } from 'src/entity/User';
-import md5 from 'md5';
+import { SignIn } from '../../../src/model/SignIn';
 
 const Sessions: NextApiHandler = async (req, res) => {
   res.setHeader('Content-Type', 'application/json;charset=utf-8');
   const { username, password } = req.body;
-  const connection = await getDataBaseConnection();
-  const user = await connection.manager.findOne(User, { where: { username } });
-  if (user) {
-    const passwordDigest = md5(password);
-    if (user.passwordDigest === passwordDigest) {
-      res.statusCode = 200;
-      res.end(JSON.stringify(user));
-    } else {
-      res.statusCode = 422;
-      res.end(JSON.stringify({ password: ['密码不正确'] }));
-    }
-  } else {
+  const signIn = new SignIn();
+  signIn.username = username;
+  signIn.password = password;
+  await signIn.validate();
+  if (signIn.hasErrors()) {
     res.statusCode = 422;
-    res.end(JSON.stringify({ errors: { username: ['用户名不存在'] } }));
+    res.end(JSON.stringify(signIn.errors));
+  } else {
+    res.statusCode = 200;
+    res.end(JSON.stringify(signIn.user));
   }
 };
 export default Sessions;
