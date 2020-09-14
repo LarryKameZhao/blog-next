@@ -9,7 +9,8 @@ temp/
 /.pnp
 .pnp.js
 /.vscode/
-/.idea/
+/.idea
+/.env.local
 # testing
 /coverage
 
