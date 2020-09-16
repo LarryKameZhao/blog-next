@@ -1,8 +1,24 @@
 import React from 'react';
-export const Form: React.FC<any> = () => {
+type Props = {
+  fields: {
+    label: string;
+    type: 'text' | 'password';
+    value: string | number;
+  }[];
+};
+export const Form: React.FC<Props> = (props) => {
   return (
     <form>
-      <div>form</div>
+      {props.fields.map((field, index) => {
+        return (
+          <div key={index}>
+            <label>
+              {field.label}
+              <input type={field.type} />
+            </label>
+          </div>
+        );
+      })}
     </form>
   );
 };
